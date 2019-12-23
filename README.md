@@ -7,5 +7,5 @@ Usage
 Example invocation:
 
 ```
-python duplicity-fuse.py -o url=file:///dir/with/duplicity/backup /some/mountpoint
+duplicity_fuse -o url=file:///dir/with/duplicity/backup /some/mountpoint
 ```
