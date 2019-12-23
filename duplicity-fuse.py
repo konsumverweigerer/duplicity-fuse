@@ -459,11 +459,14 @@ Userspace duplicity filesystem
     try:
         if server.fuse_args.mount_expected():
             server.runduplicity()
-    except OSError:
+    except OSError as e:
         print("can't enter root of underlying filesystem", file=sys.stderr)
         sys.exit(1)
 
-    server.main()
+    try:
+        server.main()
+    except Exception as e:
+        server.parser.print_help()
 
 
 if __name__ == '__main__':
