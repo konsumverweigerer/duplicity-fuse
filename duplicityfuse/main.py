@@ -25,6 +25,9 @@
  Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 '''
 
+# python2 compatibility
+from __future__ import print_function
+
 import os
 import stat
 import errno
@@ -33,7 +36,11 @@ import getpass
 import gzip
 import time
 import types
-from duplicity import collections, commandline, diffdir, dup_temp, dup_time, file_naming, globals, gpg, log, manifest, patchdir, path, robust, tempdir
+from duplicity import commandline, diffdir, dup_temp, dup_time, file_naming, globals, gpg, log, manifest, patchdir, path, robust, tempdir
+try:
+    from duplicity import collections
+except:
+    from duplicity import dup_collections as collections
 from xml.etree.cElementTree import Element, SubElement, QName
 from datetime import datetime
 from getopt import getopt, GetoptError
@@ -301,7 +308,7 @@ def get_passphrase(fd=None):
         else:
             pass1 = os.fdopen(fd).read()
         if not pass1 and not globals.gpg_profile.recipients:
-            print "Cannot use empty passphrase with symmetric encryption!  Please try again."
+            print("Cannot use empty passphrase with symmetric encryption!  Please try again.")
             continue
         os.environ['PASSPHRASE'] = pass1
         return pass1
@@ -317,7 +324,7 @@ def get_backendpassphrase(fd=None):
         else:
             pass1 = os.fdopen(fd).read()
         if not pass1:
-            print "Need Backend passphrase!  Please try again."
+            print("Need Backend passphrase!  Please try again.")
             continue
         os.environ['FTP_PASSWORD'] = pass1
         return pass1
@@ -453,7 +460,7 @@ Userspace duplicity filesystem
         if server.fuse_args.mount_expected():
             server.runduplicity()
     except OSError:
-        print >> sys.stderr, "can't enter root of underlying filesystem"
+        print("can't enter root of underlying filesystem", file=sys.stderr)
         sys.exit(1)
 
     server.main()
