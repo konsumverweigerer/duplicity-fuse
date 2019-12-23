@@ -28,9 +28,6 @@
 # python2 compatibility
 from __future__ import print_function
 
-# python2 compatibility
-from __future__ import print_function
-
 import os
 import stat
 import errno
