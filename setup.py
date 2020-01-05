@@ -7,7 +7,7 @@ setuptools.setup(
     name = "DuplicityFuse",
     packages = setuptools.find_packages(),
     include_package_data = True,
-    install_requires = ['fuse-python'],
+    install_requires = ['duplicity', 'fuse-python', 'six', 'treelib'],
     version = "0.1.0",
     description = "Filesystem interface to duplicity backups",
     author = "Peter Gruber",
@@ -16,12 +16,13 @@ setuptools.setup(
     download_url = "https://github.com/konsumverweigerer/duplicity-fuse/archive/master.zip",
     entry_points={
         'console_scripts': [
-            'duplicity_fuse = duplicityfuse.main:main',
+            'duplicity_fuse = duplicityfuse.fuse:mount',
         ],
     },
     keywords = ["encoding", "i18n", "xml"],
     classifiers = [
-        "Programming Language :: Python :: 2.6",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.6",
         "Intended Audience :: Developers",
         "Intended Audience :: End Users/Desktop",
         "License :: Other/Proprietary License",
